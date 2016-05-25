@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Track_Android_3_3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="password">Password</string>
+    <string name="nickname">Nickname</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="loginReg">Login</string>
+    <string name="chat_name">Name</string>
+    <string name="chat_descr">Description</string>
+    <string name="chat_create">Create chat</string>
+    <string name="aboutNickname">Nickname</string>
+    <string name="aboutStatus">Status</string>
+    <string name="aboutButtonChange">Save profile</string>
+    <string name="chat_add">Add chat</string>
+    <string name="profile_edit">Edit profile</string>
+
+    <string name="exit">Exit</string>
+
+    <string name="title_chats">Chats</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_chat_create">Create chat</string>
+    <string name="title_profile_edit">Edit profile</string>
+    <string name="title_profile">My profile</string>
+</resources>

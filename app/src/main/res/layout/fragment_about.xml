@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:src="@drawable/user"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/aboutAvatarEdit"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp" />
+
+    <TextView
+        android:id="@+id/aboutNickname"
+        android:text="@string/aboutNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboutAvatarEdit"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/aboutStatus"
+        android:hint="@string/aboutStatus"
+        android:text="@string/aboutStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/aboutNickname"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/aboutEdit"
+        android:text="@string/profile_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/aboutStatus"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

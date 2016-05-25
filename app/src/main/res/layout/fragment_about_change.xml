@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:src="@drawable/user"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:id="@+id/aboutAvatarEdit"
+        android:layout_above="@+id/aboutNicknameEditText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/aboutNicknameEditText"
+        android:text="@string/aboutNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/aboutStatusEditText"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/aboutStatusEditText"
+        android:hint="@string/aboutStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/aboutAvatarEdit"
+        android:layout_alignStart="@+id/aboutAvatarEdit"
+        android:layout_alignRight="@+id/aboutAvatarEdit"
+        android:layout_alignEnd="@+id/aboutAvatarEdit" />
+
+    <Button
+        android:id="@+id/aboutButtonSave"
+        android:text="@string/aboutButtonChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/aboutStatusEditText"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
