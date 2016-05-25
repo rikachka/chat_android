@@ -15,7 +15,7 @@
         <ImageButton
             android:id="@+id/person_left_image"
             android:layout_gravity="start"
-            android:src="@drawable/user"
+            android:background="@drawable/user"
             android:layout_width="50dp"
             android:layout_height="50dp" />
         <TextView
@@ -71,7 +71,7 @@
         <ImageButton
             android:id="@+id/person_right_image"
             android:layout_gravity="start"
-            android:src="@drawable/user"
+            android:background="@drawable/user"
             android:layout_width="50dp"
             android:layout_height="50dp" />
         <TextView

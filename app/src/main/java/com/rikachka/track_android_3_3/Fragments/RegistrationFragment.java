@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.rikachka.track_android_3_3.Messages.Message;
 import com.rikachka.track_android_3_3.Messages.Client.RegistrationData;
+import com.rikachka.track_android_3_3.MyActivity;
 import com.rikachka.track_android_3_3.R;
 import com.rikachka.track_android_3_3.SplashActivity;
 
@@ -23,14 +24,14 @@ public class RegistrationFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.registration_fragment, null);
+        View view = inflater.inflate(R.layout.fragment_registration, null);
 
         final EditText email = (EditText) view.findViewById(R.id.email);
         final EditText password = (EditText) view.findViewById(R.id.password);
         final EditText nick = (EditText) view.findViewById(R.id.nickname);
 
-        final SplashActivity splashActivity = (SplashActivity) getActivity();
-        splashActivity.getMessageSocketService().setRegistrationFragment(this);
+        final MyActivity myActivity = (MyActivity) getActivity();
+        myActivity.getMessageSocketService().setRegistrationFragment(this);
         register = (Button) view.findViewById(R.id.register);
 
         register.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +41,7 @@ public class RegistrationFragment extends Fragment {
                         password.getText().toString(), nick.getText().toString()));
                 Gson gson = new Gson();
                 String jsonMessage = gson.toJson(message, Message.class);
-                splashActivity.getMessageSocketService().sendMessage(jsonMessage);
+                myActivity.getMessageSocketService().sendMessage(jsonMessage);
             }
         });
 
@@ -64,7 +65,7 @@ public class RegistrationFragment extends Fragment {
                 public void run() {
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     register.callOnClick();
-                    Toast.makeText(getActivity(), "Соединение прервано", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "No connection", Toast.LENGTH_SHORT).show();
                 }
             });
         }

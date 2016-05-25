@@ -23,7 +23,7 @@ import com.rikachka.track_android_3_3.Fragments.SplashFragment;
 import com.rikachka.track_android_3_3.Messages.Client.LoginData;
 import com.rikachka.track_android_3_3.Messages.Message;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements MyActivity {
     private final String LOG_TAG = getClass().getSimpleName();
     private ServiceConnection serviceConnection;
     private MessageSocketService messageSocketService;
@@ -38,6 +38,8 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        deleteText();
 
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,

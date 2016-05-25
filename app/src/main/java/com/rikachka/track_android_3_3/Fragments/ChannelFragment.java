@@ -8,8 +8,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.rikachka.track_android_3_3.Classes.Channel;
@@ -52,7 +50,7 @@ public class ChannelFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.channel_fragment, null);
+        view = inflater.inflate(R.layout.fragment_channel, null);
 
         getActivity().setTitle(channel.getName());
 
@@ -156,7 +154,10 @@ public class ChannelFragment extends Fragment implements View.OnClickListener {
             try {
                 return chatMessageList.size();
             } catch (NullPointerException e) {
+                Toast disconnectedToast = Toast.makeText(getActivity().getApplicationContext(), "Server does not work. Sorry! Good bye!", Toast.LENGTH_LONG);
+                disconnectedToast.show();
                 Log.e("ChatAdapter", "NullPointerException");
+                ((MainActivity) getActivity()).finishActivity();
                 return 0;
             }
         }
@@ -176,7 +177,7 @@ public class ChannelFragment extends Fragment implements View.OnClickListener {
             LastMsg message = chatMessageList.get(position);
             View vi = convertView;
             if (convertView == null)
-                vi = inflater.inflate(R.layout.chatbubble, null);
+                vi = inflater.inflate(R.layout.chat_bubble, null);
 
             TextView msg = (TextView) vi.findViewById(R.id.message_text);
             TextView num_message = (TextView) vi.findViewById(R.id.num_message);

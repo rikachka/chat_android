@@ -3,6 +3,7 @@ package com.rikachka.track_android_3_3;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.NavigationView;
@@ -27,6 +28,7 @@ import com.rikachka.track_android_3_3.Fragments.ChatFragment;
 import com.rikachka.track_android_3_3.Fragments.LoginFragment;
 import com.rikachka.track_android_3_3.Fragments.SettingsFragment;
 import com.rikachka.track_android_3_3.Messages.Client.ChannelListData;
+import com.rikachka.track_android_3_3.Messages.Client.LoginData;
 import com.rikachka.track_android_3_3.Messages.Client.UserInfoData;
 import com.rikachka.track_android_3_3.Messages.Message;
 
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity
     private String cid;
     private String sid;
     private String nick;
+
+    private SharedPreferences sPref;
 
 
     @Override
@@ -69,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View header = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        View header = navigationView.inflateHeaderView(R.layout.main_nav_header);
 
         nickname = (TextView) header.findViewById(R.id.nickname_nav);
         status = (TextView) header.findViewById(R.id.status_nav);
@@ -182,8 +186,16 @@ public class MainActivity extends AppCompatActivity
                 setTitle(R.string.title_settings);
                 break;
             case R.id.nav_exit:
-                ft.replace(R.id.frameLayout_main, new LoginFragment());
-                ft.commit();
+                deleteText();
+//                ft.replace(R.id.frameLayout_main, new LoginFragment());
+//                ft.commit();
+
+//                finish();
+//                Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+//                startActivity(intent);
+
+                Toast disconnectedToast = Toast.makeText(getApplicationContext(), "Sorry, it is still impossible yet", Toast.LENGTH_LONG);
+                disconnectedToast.show();
                 break;
         }
 
@@ -256,5 +268,41 @@ public class MainActivity extends AppCompatActivity
 
     public void setStatus(String stat) {
         status.setText(stat);
+    }
+
+    public void saveText(String login, String password) {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString("LOGIN", login);
+        ed.putString("PASS", password);
+        ed.commit();
+    }
+
+    public void deleteText() {
+        sPref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.remove("LOGIN");
+        ed.remove("PASS");
+        ed.commit();
+    }
+
+    public void finishActivity() {
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    int logoTimer = 0;
+                    while (logoTimer < 5000) {
+                        sleep(100);
+                        logoTimer = logoTimer + 100;
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    finish();
+                }
+                System.exit(1);
+            }
+        };
+        timer.start();
     }
 }

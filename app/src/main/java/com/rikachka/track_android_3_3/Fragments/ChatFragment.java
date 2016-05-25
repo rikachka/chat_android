@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.rikachka.track_android_3_3.Classes.Channel;
@@ -37,7 +38,7 @@ public class ChatFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chat_fragment, null);
+        View view = inflater.inflate(R.layout.fragment_chat, null);
 
         final RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
@@ -135,6 +136,9 @@ public class ChatFragment extends Fragment {
                 return channels.size();
             } catch (NullPointerException e) {
                 Log.e("RvAdapter", "NullPointerException");
+                Toast disconnectedToast = Toast.makeText(getActivity().getApplicationContext(), "Server does not work. Sorry! Good bye!", Toast.LENGTH_LONG);
+                disconnectedToast.show();
+                ((MainActivity) getActivity()).finishActivity();
                 return 0;
             }
         }

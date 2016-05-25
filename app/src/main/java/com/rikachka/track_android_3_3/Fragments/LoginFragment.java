@@ -1,8 +1,6 @@
 package com.rikachka.track_android_3_3.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,7 +27,7 @@ public class LoginFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.login_fragment, null);
+        View view = inflater.inflate(R.layout.fragment_login, null);
 
         final EditText loginEditView = (EditText) view.findViewById(R.id.emailEditView);
         final EditText passEditView = (EditText) view.findViewById(R.id.passwordEditView);
@@ -47,20 +45,23 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        final SplashActivity splashActivity = (SplashActivity) getActivity();
-        splashActivity.getMessageSocketService().setLoginFragment(this);
+        final MyActivity myActivity = (MyActivity) getActivity();
+        myActivity.getMessageSocketService().setLoginFragment(this);
+
+//        final SplashActivity splashActivity = (SplashActivity) getActivity();
+//        splashActivity.getMessageSocketService().setLoginFragment(this);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Message message = new Message("auth", new LoginData(loginEditView.getText().toString(),
                         passEditView.getText().toString()));
-                splashActivity.saveText(loginEditView.getText().toString(),
+                myActivity.saveText(loginEditView.getText().toString(),
                         passEditView.getText().toString());
 //                Message message = new Message("auth", new LoginData("MY_LOGIN1", "MD5_FROM_PASS1"));
                 Gson gson = new Gson();
                 String jsonMessage = gson.toJson(message, Message.class);
-                splashActivity.getMessageSocketService().sendMessage(jsonMessage);
+                myActivity.getMessageSocketService().sendMessage(jsonMessage);
             }
         });
 
@@ -78,8 +79,8 @@ public class LoginFragment extends Fragment {
                 e.printStackTrace();
             }
         } else {
-            SplashActivity splashActivity = (SplashActivity) getActivity();
-            splashActivity.deleteText();
+            MyActivity myActivity = (MyActivity) getActivity();
+            myActivity.deleteText();
             getActivity().runOnUiThread(new Runnable() {
                 public void run() {
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -97,7 +98,7 @@ public class LoginFragment extends Fragment {
 //    @Nullable
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.login_fragment, null);
+//        View view = inflater.inflate(R.layout.fragment_login, null);
 //
 //        final EditText loginEditView = (EditText) view.findViewById(R.id.emailEditView);
 //        final EditText passEditView = (EditText) view.findViewById(R.id.passwordEditView);
