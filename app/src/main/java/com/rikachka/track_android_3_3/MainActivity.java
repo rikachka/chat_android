@@ -17,13 +17,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.rikachka.track_android_3_3.Fragments.AboutChangeFragment;
 import com.rikachka.track_android_3_3.Fragments.AboutFragment;
-import com.rikachka.track_android_3_3.Fragments.ChangeAboutFragment;
 import com.rikachka.track_android_3_3.Fragments.ChatFragment;
 import com.rikachka.track_android_3_3.Fragments.LoginFragment;
 import com.rikachka.track_android_3_3.Fragments.SettingsFragment;
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         bindService(new Intent(this, MessageSocketService.class), serviceConnection, 0);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frameLayout_main, new ChangeAboutFragment());
+        ft.replace(R.id.frameLayout_main, new AboutChangeFragment());
         ft.commit();
         setTitle(R.string.title_profile_edit);
     }
@@ -221,7 +220,7 @@ public class MainActivity extends AppCompatActivity
 //                setTitle(R.string.title_chat_create);
 //                return true;
 //            case R.id.changeInfo:
-//                ft.replace(R.id.frameLayout_main, new ChangeAboutFragment());
+//                ft.replace(R.id.frameLayout_main, new AboutChangeFragment());
 //                ft.commit();
 //                setTitle(R.string.title_profile_edit);
 //                return true;

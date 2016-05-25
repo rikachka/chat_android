@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +29,7 @@ import com.rikachka.track_android_3_3.Classes.LastMsg;
 import com.rikachka.track_android_3_3.MainActivity;
 import com.rikachka.track_android_3_3.Messages.Client.EnterData;
 import com.rikachka.track_android_3_3.Messages.Client.LeaveData;
+import com.rikachka.track_android_3_3.Messages.Client.UserInfoData;
 import com.rikachka.track_android_3_3.Messages.Message;
 import com.rikachka.track_android_3_3.Messages.Client.MessageData;
 import com.rikachka.track_android_3_3.R;
@@ -148,7 +153,12 @@ public class ChannelFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public int getCount() {
-            return chatMessageList.size();
+            try {
+                return chatMessageList.size();
+            } catch (NullPointerException e) {
+                Log.e("ChatAdapter", "NullPointerException");
+                return 0;
+            }
         }
 
         @Override
@@ -201,13 +211,41 @@ public class ChannelFragment extends Fragment implements View.OnClickListener {
             TextView time2 = (TextView) vi.findViewById(R.id.time2);
             time2.setText(message.getTime());
 
+            ImageButton person_left_image = (ImageButton) vi.findViewById(R.id.person_left_image);
+            person_left_image.setOnClickListener(goToProfile);
+            person_left_image.setTag(message.getFrom());
+            ImageButton person_right_image = (ImageButton) vi.findViewById(R.id.person_right_image);
+            person_right_image.setOnClickListener(goToProfile);
+            person_right_image.setTag(message.getFrom());
+
             return vi;
         }
 
         public void add(LastMsg object) {
             chatMessageList.add(object);
         }
+
+        View.OnClickListener goToProfile = new View.OnClickListener() {
+            public void onClick(View v) {
+                String sender = (String) v.getTag();
+
+                Message message = new Message("userinfo", new UserInfoData(sender, cid, sid));
+                Gson gson = new Gson();
+                String msg = gson.toJson(message);
+                ((MainActivity)getActivity()).getMessageSocketService().sendMessage(msg);
+
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                AboutFragment aboutFragment = new AboutFragment();
+                aboutFragment.setInfo(sender);
+                ft.replace(R.id.frameLayout_main, aboutFragment);
+                ft.addToBackStack("channel");
+                ft.commit();
+                getActivity().setTitle(R.string.title_profile);
+            }
+        };
     }
+
+
 
     @Override
     public void onDestroy() {

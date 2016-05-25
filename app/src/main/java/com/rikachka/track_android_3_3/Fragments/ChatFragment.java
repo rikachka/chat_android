@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.rikachka.track_android_3_3.Messages.Client.ChannelListData;
 import com.rikachka.track_android_3_3.Messages.Message;
 import com.rikachka.track_android_3_3.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatFragment extends Fragment {
@@ -90,7 +92,7 @@ public class ChatFragment extends Fragment {
     }
 
     public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder> {
-        private List<Channel> channels;
+        private List<Channel> channels = new ArrayList<Channel>();
 
         public RVAdapter(List<Channel> channels) {
             this.channels = channels;
@@ -129,7 +131,12 @@ public class ChatFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return channels.size();
+            try {
+                return channels.size();
+            } catch (NullPointerException e) {
+                Log.e("RvAdapter", "NullPointerException");
+                return 0;
+            }
         }
 
         public class PersonViewHolder extends RecyclerView.ViewHolder {

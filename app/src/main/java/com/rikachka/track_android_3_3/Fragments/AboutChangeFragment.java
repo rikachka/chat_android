@@ -3,6 +3,7 @@ package com.rikachka.track_android_3_3.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.rikachka.track_android_3_3.Messages.Message;
 import com.rikachka.track_android_3_3.Messages.Client.SetUserInfoData;
 import com.rikachka.track_android_3_3.R;
 
-public class ChangeAboutFragment extends Fragment {
+public class AboutChangeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class ChangeAboutFragment extends Fragment {
         aboutChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("1", status.getText().toString());
+//                Log.e("1", status.getText().toString());
                 if (!status.getText().equals("")) {
                     MainActivity mainActivity = (MainActivity)getActivity();
                     Message message = new Message("setuserinfo",
@@ -55,6 +56,11 @@ public class ChangeAboutFragment extends Fragment {
                     mainActivity.getMessageSocketService().sendMessage(msg);
 
                     mainActivity.setStatus(status.getText().toString());
+
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.frameLayout_main, new AboutFragment());
+                    ft.commit();
+                    getActivity().setTitle(R.string.title_profile);
                 }
             }
         });

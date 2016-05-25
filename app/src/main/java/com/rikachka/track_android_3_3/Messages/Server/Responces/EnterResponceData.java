@@ -4,7 +4,10 @@ import com.rikachka.track_android_3_3.Classes.LastMsg;
 import com.rikachka.track_android_3_3.Classes.User;
 import com.rikachka.track_android_3_3.Messages.Data;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class EnterResponceData implements Data {
     private String status;
@@ -31,10 +34,10 @@ public class EnterResponceData implements Data {
     }
 
     public List<User> getUsers() {
-        return users;
+        return  users;
     }
 
-    public List<LastMsg> getLast_msg() {
+    public List<LastMsg> getLastMsg() {
         return last_msg;
     }
 }
